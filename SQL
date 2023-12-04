@@ -1,0 +1,106 @@
+---Total cases vs Total deaths
+select location,
+affected_date,
+total_cases,
+total_deaths,
+(cast(total_deaths as decimal)/total_cases)*100 as Death_perc
+from Covid_data where location='India'
+order by 1,2;
+
+---Total cases vs Population
+select location,
+affected_date,
+population,
+total_cases,
+(cast(total_cases as decimal)/population)*100 as perc_of_population
+from Covid_data where location='India'
+order by 1,2;
+
+-- Countries with Highest infection rate compared to population
+select location,
+population,
+affected_date,
+max(coalesce(total_cases,0)) as  Highest_infection_cnt,
+max(coalesce((cast(total_cases as decimal)/population),0))*100 as perc_of_population
+from Covid_data
+group by location,population,affected_date
+order by 4 desc;
+
+-- Countries with Highest Death count compared to population
+
+select location,
+max(coalesce(total_deaths,0)) as  Total_cnt
+from Covid_data where continent is not null
+group by location
+order by 2 desc;
+
+-----contintental breakdown highest death rate cnt per population
+
+select continent,
+max(coalesce(total_deaths,0)) as  Total_cnt
+from Covid_data where continent is not null
+group by continent
+order by 2 desc;
+
+----------Global Numbers
+select affected_date,
+sum(new_cases) as  Total_cases,
+sum(new_deaths) as  Total_deaths,
+sum(new_deaths)/nullif(sum(new_cases),0)*100 as deathperc
+from Covid_data where continent is not null 
+group by affected_date
+order by 1,2;
+
+----Total population vs Vaccination
+
+
+with cte as(select a.continent,a.location,a.affected_date,
+population,new_vaccinations,
+sum(new_vaccinations) over(partition by a.location) as rolling_vaccination
+from covid_data a
+join
+Covid_Vaccination b
+on a.location=b.location
+and cast(a.affected_date as date) = b.affected_date
+where a.continent is not null
+order by 2,3)
+select a.*,
+(rolling_vaccination/population)*100  from cte a;
+
+
+select location,
+population,
+affected_date,
+max(coalesce((cast(total_cases as decimal)/population),0))*100 as perc_of_population
+from Covid_data 
+group by location,population,affected_date
+order by 4 desc;
+
+select 
+sum(new_cases) as  Total_cases,
+sum(new_deaths) as  Total_deaths,
+sum(new_deaths)/nullif(sum(new_cases),0)*100 as deathperc
+from Covid_data where continent is not null 
+order by 1,2;
+
+select location,
+sum(new_deaths) as  Total_cnt
+from Covid_data where continent is  null
+and location not in('World','European Union','International','High income','Upper middle income',
+				   'Lower middle income','Low income')
+group by location
+order by 2 desc;
+
+
+INSERT INTO covid_data
+VALUES ('AFG',	
+'Asia',
+'Afghanistan',
+'2020-01-03',
+41128772,
+null,
+0,
+null,null,0,null,null,0,null,null,0,										
+null,null,null,null,null,null,null,null,
+null,null
+);
