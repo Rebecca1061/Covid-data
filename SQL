@@ -1,4 +1,5 @@
 ---Total cases vs Total deaths
+
 select location,
 affected_date,
 total_cases,
