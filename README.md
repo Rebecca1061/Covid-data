@@ -14,5 +14,5 @@
   >Global Numbers of Total infected cases and Deaths with percentage.
   >Total population vs Vaccination
 
-3.Power BI Dashboard for 
+3.Power BI Dashboard of Covid Data Analysis
 ![image](https://github.com/Rebecca1061/Data-Analysis-Project-2/assets/152878222/df6f1258-8bc2-468d-b4f9-15987bb05a09)
