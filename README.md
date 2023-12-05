@@ -1,6 +1,6 @@
 # Project-2
 1.DATA CLEANING-Nashville Housing data using SQL
-  >Populating property address with null values to actual values.
+  `>Populating property address with null values to actual values.`
   > Breaking out property address into individual cols(address,city,state).
   >Change Y ann N to 'Yes' and 'No' in "Sold as Vacant" field.
   >Remove dupicates.
