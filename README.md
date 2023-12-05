@@ -1,4 +1,4 @@
-# Covid-data
+# Project-2
 1.DATA CLEANING-Nashville Housing data using SQL
   >Populating property address with null values to actual values.
   > Breaking out property address into individual cols(address,city,state).
