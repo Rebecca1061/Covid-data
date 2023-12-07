@@ -122,9 +122,7 @@ drop column saledate
 select * from Nashville_Housing_data where propadd1 is not null
 
 
-COPY Nashville_Housing_data
-FROM 'C:\Users\Dell\Documents\2023\Data analysis projects\Project-2\Data cleaning\Nashville Housing Data for Data Cleaning.csv'
-CSV HEADER;
+
 
 CREATE TABLE Nashville_Housing_data(
 UniqueID int,
